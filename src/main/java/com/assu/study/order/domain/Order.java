@@ -6,14 +6,19 @@ import java.util.List;
 public class Order {
     // OrderNo 타입 자체로 id 가 주문 번호임을 알 수 있음
     private OrderNo id;
+    private Orderer orderer;
+
     private OrderState state;
     private List<OrderLine> orderLines;
     private ShippingInfo shippingInfo;
     //private Money totalAmounts;
 
-    public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo) {
+    // 생성자 호출 시점에 필요한 데이터에 대한 검증 확인 가능
+    public Order(Orderer orderer, List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState state) {
+        setOrderer(orderer);
         setOrderLines(orderLines);
         setShippingInfo(shippingInfo);
+        this.state = state;
     }
 
     // 생성자에서 호출되는 함수
@@ -22,6 +27,13 @@ public class Order {
         verifyAtLeastOneOrderLine(orderLines);
         this.orderLines = orderLines;
         calculateTotalAmounts();
+    }
+
+    private void setOrderer(Orderer orderer) {
+        if (orderer == null) {
+            throw new IllegalArgumentException("no orderer");
+        }
+        this.orderer = orderer;
     }
 
     // 최소 한 종류 이상의 상품이 포함되어 있는지 확인
@@ -34,12 +46,14 @@ public class Order {
     // 총 주문 금액 계산
     private void calculateTotalAmounts() {
         int sum = orderLines.stream()
-                .mapToInt(OrderLine::getAmounts)
+                .mapToInt(x -> x.getAmounts().getValue())
                 .sum();
-        //this.totalAmounts = new Money(sum);
+//        this.totalAmounts = orderLines.stream()
+//                .mapToInt(x -> x.getAmounts().getValue())
+//                .sum();
     }
 
-    // 배송지 정보 검사
+    // 배송지 정보 검사 후 배송지 값 설정
     private void setShippingInfo(ShippingInfo shippingInfo) {
         // 배송지 정보는 필수임
         if (shippingInfo == null) {
@@ -72,6 +86,7 @@ public class Order {
         // TODO
     }
 
+    // 결제 완료 확인
     public void completePayment() {
         // TODO
     }
