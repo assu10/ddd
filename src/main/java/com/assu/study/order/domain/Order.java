@@ -1,11 +1,8 @@
 package com.assu.study.order.domain;
 
-import lombok.EqualsAndHashCode;
-
 import java.util.List;
 
 // 주문
-@EqualsAndHashCode
 public class Order {
     private String orderNumber;
     private OrderState state;

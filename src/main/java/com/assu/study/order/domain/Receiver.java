@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode  // 밸류 타입
 public class Receiver {
     private String name;
     private String phoneNumber;

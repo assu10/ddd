@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode  // 밸류 타입
 public class Money {
     private final int value;
 
