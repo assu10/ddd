@@ -4,7 +4,8 @@ import java.util.List;
 
 // 주문
 public class Order {
-    private String orderNumber;
+    // OrderNo 타입 자체로 id 가 주문 번호임을 알 수 있음
+    private OrderNo id;
     private OrderState state;
     private List<OrderLine> orderLines;
     private ShippingInfo shippingInfo;
