@@ -1,4 +1,4 @@
-package com.assu.study.order;
+package com.assu.study.order.domain;
 
 import lombok.EqualsAndHashCode;
 

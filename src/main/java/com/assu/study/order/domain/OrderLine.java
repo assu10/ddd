@@ -1,23 +1,24 @@
-package com.assu.study.order;
+package com.assu.study.order.domain;
 
+import com.assu.study.common.Money;
 import lombok.Getter;
 
 // 주문 항목
 @Getter
 public class OrderLine {
     private Product product;
-    private int price;
+    private Money price;
     private int quantity;
-    private int amounts;
+    private Money amounts;
 
-    public OrderLine(Product product, int price, int quantity) {
+    public OrderLine(Product product, Money price, int quantity) {
         this.product = product;
         this.price = price;
         this.quantity = quantity;
         this.amounts = this.calculateAmounts();
     }
 
-    private int calculateAmounts() {
-        return price * quantity;
+    private Money calculateAmounts() {
+        return price.multiply(quantity);
     }
 }
