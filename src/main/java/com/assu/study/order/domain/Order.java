@@ -1,8 +1,13 @@
 package com.assu.study.order.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.List;
 
 // 주문
+@Entity
+@Table(name = "TBL_ORDER")
 public class Order {
     // OrderNo 타입 자체로 id 가 주문 번호임을 알 수 있음
     private OrderNo id;
