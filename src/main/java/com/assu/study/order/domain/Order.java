@@ -54,14 +54,16 @@ public class Order {
     }
 
     // 배송지 정보 검사 후 배송지 값 설정
-    private void setShippingInfo(ShippingInfo shippingInfo) {
+    private void setShippingInfo(ShippingInfo newShippingInfo) {
         // 배송지 정보는 필수임
-        if (shippingInfo == null) {
+        if (newShippingInfo == null) {
             throw new IllegalArgumentException("no shippingInfo");
         }
-        this.shippingInfo = shippingInfo;
+        // 밸류 타입의 데이터를 변경할 때는 새로운 객체로 교체함
+        this.shippingInfo = newShippingInfo;
     }
 
+    // 도메인 모델의 엔티티는 도메인 기능도 함께 제공
     // 배송지 변경
     public void changeShippingInfo(ShippingInfo newShipping) {
         verifyNotYetShipped();
