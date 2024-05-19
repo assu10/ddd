@@ -3,6 +3,7 @@ package com.assu.study.order.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+// 받는 사람
 @Getter
 @EqualsAndHashCode  // 밸류 타입
 public class Receiver {

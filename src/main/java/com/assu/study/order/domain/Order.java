@@ -66,6 +66,7 @@ public class Order {
     // 도메인 모델의 엔티티는 도메인 기능도 함께 제공
     // 배송지 변경
     public void changeShippingInfo(ShippingInfo newShipping) {
+        // 배송지 변경 가능 여부 확인
         verifyNotYetShipped();
         setShippingInfo(newShipping);
     }
