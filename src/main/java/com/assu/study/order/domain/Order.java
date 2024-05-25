@@ -11,12 +11,12 @@ import java.util.List;
 public class Order {
     // OrderNo 타입 자체로 id 가 주문 번호임을 알 수 있음
     private OrderNo id;
-    private Orderer orderer;
+    private Orderer orderer;    // 주문자
 
-    private OrderState state;
-    private List<OrderLine> orderLines;
-    private ShippingInfo shippingInfo;
-    //private Money totalAmounts;
+    private OrderState state;   // 주문 상태
+    private List<OrderLine> orderLines; // 주문 항목
+    private ShippingInfo shippingInfo;  // 배송지 정보
+    //private Money totalAmounts;   // 총 주문 금액
 
     // 생성자 호출 시점에 필요한 데이터에 대한 검증 확인 가능
     public Order(Orderer orderer, List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState state) {
