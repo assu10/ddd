@@ -1,9 +1,9 @@
 package com.assu.study.order.command.application;
 
 import com.assu.study.order.NoOrderException;
-import com.assu.study.order.domain.Order;
-import com.assu.study.order.domain.OrderNo;
-import com.assu.study.order.domain.OrderRepository;
+import com.assu.study.order.command.domain.Order;
+import com.assu.study.order.command.domain.OrderNo;
+import com.assu.study.order.command.domain.OrderRepository;
 
 public class CancelOrderService {
     private OrderRepository orderRepository;

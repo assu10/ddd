@@ -1,4 +1,4 @@
-package com.assu.study.order.domain;
+package com.assu.study.order.command.domain;
 
 import com.assu.study.common.Money;
 import lombok.EqualsAndHashCode;

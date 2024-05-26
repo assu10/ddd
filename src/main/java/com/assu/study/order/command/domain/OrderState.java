@@ -1,4 +1,4 @@
-package com.assu.study.order.domain;
+package com.assu.study.order.command.domain;
 
 // 주문 상태 표현
 public enum OrderState {
