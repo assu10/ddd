@@ -1,19 +1,24 @@
 package com.assu.study.order.command.application;
 
 import com.assu.study.order.NoOrderException;
-import com.assu.study.order.command.domain.Order;
-import com.assu.study.order.command.domain.OrderNo;
-import com.assu.study.order.command.domain.OrderRepository;
+import com.assu.study.order.command.domain.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
+@Service
 public class CancelOrderService {
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final CancelPolicy cancelPolicy;
 
-    public void cancel(OrderNo orderNo) {
-        Order order = orderRepository.findByNumber(orderNo);
-        if (order == null) {
-            throw new NoOrderException();
+    @Transactional
+    public void cancel(OrderNo orderNo, Canceller canceller) {
+        Order order = orderRepository.findById(orderNo)
+                .orElseThrow(() -> new NoOrderException());
+        if (!cancelPolicy.hasCancellationPermission(order, canceller)) {
+            throw new NoCancellablePermission();
         }
         order.cancel();
-        ;
     }
 }

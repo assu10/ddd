@@ -1,7 +1,11 @@
 package com.assu.study.order.command.domain;
 
-public interface OrderRepository {
-    Order findByNumber(OrderNo number);
+import org.springframework.data.repository.Repository;
+
+import java.util.Optional;
+
+public interface OrderRepository extends Repository<Order, OrderNo> {
+    Optional<Order> findById(OrderNo id);
 
     void save(Order order);
 }

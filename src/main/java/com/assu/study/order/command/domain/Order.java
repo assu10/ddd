@@ -1,6 +1,7 @@
 package com.assu.study.order.command.domain;
 
 import com.assu.study.common.Money;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -8,10 +9,11 @@ import java.util.List;
 
 // 주문 (애그리거트 루트)
 @Entity
-@Table(name = "TBL_ORDER")
+@Table(name = "purchase_order")
 public class Order {
     // OrderNo 타입 자체로 id 가 주문 번호임을 알 수 있음
-    private OrderNo id;
+    @EmbeddedId
+    private OrderNo id; // OrderNo 가 식별자 타입
     private Orderer orderer;    // 주문자
 
     private OrderState state;   // 주문 상태
