@@ -1,6 +1,7 @@
 package com.assu.study.order.command.domain;
 
 import com.assu.study.common.Money;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -11,13 +12,17 @@ import java.util.List;
 @Entity
 @Table(name = "purchase_order")
 public class Order {
-    // OrderNo 타입 자체로 id 가 주문 번호임을 알 수 있음
+    // OrderNo 타입 자체로 number 가 주문 번호임을 알 수 있음
     @EmbeddedId
-    private OrderNo id; // OrderNo 가 식별자 타입
+    private OrderNo number; // OrderNo 가 식별자 타입
+
+    @Embedded
     private Orderer orderer;    // 주문자
 
     private OrderState state;   // 주문 상태
     private List<OrderLine> orderLines; // 주문 항목
+
+    @Embedded
     private ShippingInfo shippingInfo;  // 배송지 정보
     private Money totalAmounts;   // 총 주문 금액
 
