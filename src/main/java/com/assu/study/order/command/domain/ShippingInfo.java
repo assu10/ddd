@@ -1,6 +1,6 @@
 package com.assu.study.order.command.domain;
 
-import com.assu.study.common.Address;
+import com.assu.study.common.model.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

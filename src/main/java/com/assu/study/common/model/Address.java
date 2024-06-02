@@ -1,4 +1,4 @@
-package com.assu.study.common;
+package com.assu.study.common.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

@@ -1,4 +1,4 @@
-package com.assu.study.common;
+package com.assu.study.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

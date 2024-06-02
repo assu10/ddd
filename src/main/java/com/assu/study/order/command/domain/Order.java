@@ -1,6 +1,6 @@
 package com.assu.study.order.command.domain;
 
-import com.assu.study.common.Money;
+import com.assu.study.common.model.Money;
 import jakarta.persistence.*;
 
 import java.util.List;

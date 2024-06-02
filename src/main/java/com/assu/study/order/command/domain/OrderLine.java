@@ -1,8 +1,8 @@
 package com.assu.study.order.command.domain;
 
 import com.assu.study.catalog.command.domain.product.ProductId;
-import com.assu.study.common.Money;
 import com.assu.study.common.jpa.MoneyConverter;
+import com.assu.study.common.model.Money;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;

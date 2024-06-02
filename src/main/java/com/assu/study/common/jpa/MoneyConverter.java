@@ -1,6 +1,6 @@
 package com.assu.study.common.jpa;
 
-import com.assu.study.common.Money;
+import com.assu.study.common.model.Money;
 import jakarta.persistence.AttributeConverter;
 
 //@Converter(autoApply = true)

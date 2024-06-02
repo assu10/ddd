@@ -1,8 +1,22 @@
 package com.assu.study.member.command.domain;
 
+import com.assu.study.common.jpa.EmailSetConverter;
+import com.assu.study.common.model.EmailSet;
+import jakarta.persistence.*;
+
 // 회원 (애그리거트 루트)
+@Entity
+@Table(name = "member")
 public class Member {
+    @EmbeddedId
+    private MemberId id;
+
+    @Embedded
     private Password password;
+
+    @Column(name = "emails")
+    @Convert(converter = EmailSetConverter.class)
+    private EmailSet emails;
 
     public void changePassword(String currentPassword, String newPassword) {
         if (!password.match(currentPassword)) {
