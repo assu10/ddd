@@ -16,7 +16,6 @@ public class MemberId implements Serializable {
     private String id;
 
     protected MemberId() {
-
     }
 
     private MemberId(String id) {

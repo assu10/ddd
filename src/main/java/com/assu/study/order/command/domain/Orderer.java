@@ -8,10 +8,8 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @EqualsAndHashCode  // 밸류 타입
 @Embeddable
@@ -20,8 +18,13 @@ public class Orderer {
     @AttributeOverrides(
             @AttributeOverride(name = "id", column = @Column(name = "orderer_id"))
     )
-    private MemberId memberId;
 
+
+    private MemberId memberId;
     @Column(name = "orderer_name")
     private String name;
+
+    // JPA 를 적용하기 위해 기본 생성자 추가
+    protected Orderer() {
+    }
 }

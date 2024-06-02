@@ -5,10 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 // 배송지 정보
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode  // 밸류 타입
@@ -27,4 +25,7 @@ public class ShippingInfo {
             @AttributeOverride(name = "address2", column = @Column(name = "shipping_addr2"))
     })
     private Address address;
+
+    protected ShippingInfo() {
+    }
 }
