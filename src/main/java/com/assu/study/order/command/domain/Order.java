@@ -1,16 +1,14 @@
 package com.assu.study.order.command.domain;
 
 import com.assu.study.common.Money;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 // 주문 (애그리거트 루트)
 @Entity
 @Table(name = "purchase_order")
+@Access(AccessType.FIELD)
 public class Order {
     // OrderNo 타입 자체로 number 가 주문 번호임을 알 수 있음
     @EmbeddedId
@@ -20,11 +18,19 @@ public class Order {
     private Orderer orderer;    // 주문자
 
     private OrderState state;   // 주문 상태
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "order_line",
+            joinColumns = @JoinColumn(name = "order_number"))
+    @OrderColumn(name = "line_idx")
     private List<OrderLine> orderLines; // 주문 항목
 
     @Embedded
     private ShippingInfo shippingInfo;  // 배송지 정보
     private Money totalAmounts;   // 총 주문 금액
+
+    protected Order() {
+    }
 
     // 생성자 호출 시점에 필요한 데이터에 대한 검증 확인 가능
     public Order(Orderer orderer, List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState state) {

@@ -1,18 +1,25 @@
 package com.assu.study.catalog.command.domain.product;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@EqualsAndHashCode  // 밸류 타입
-@NoArgsConstructor
-@Getter
+// 밸류 타입
 @Embeddable
+@Getter
+@EqualsAndHashCode
+@Access(AccessType.FIELD)
 public class ProductId implements Serializable {
+    @Column(name = "product_id")
     private String id;
+
+    protected ProductId() {
+    }
 
     private ProductId(String id) {
         this.id = id;
