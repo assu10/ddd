@@ -1,14 +1,16 @@
 package com.assu.study.common;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@RequiredArgsConstructor
+@ToString
+@AllArgsConstructor
 @Getter
 @EqualsAndHashCode  // 밸류 타입
 public class Money {
-    private final int value;
+    private int value;
 
     public Money add(Money money) {
         return new Money(this.value + money.value);
