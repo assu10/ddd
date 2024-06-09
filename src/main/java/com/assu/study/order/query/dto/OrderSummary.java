@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
                                     on o.order_number = ol.order_number
                          cross join product p
                 where ol.line_idx = 0
-                  and ol.product_id = p.product_id;
+                  and ol.product_id = p.product_id
                                 """
 )
 // 아래 3개 테이블에 변경사항이 있으면 OrderSummary 엔티티 로딩 전에 변경 내역을 먼저 flush 한 후 OrderSummary 엔티티 로
