@@ -1,5 +1,6 @@
 package com.assu.study.order.command.domain;
 
+import com.assu.study.common.jpa.MoneyConverter;
 import com.assu.study.common.model.Money;
 import jakarta.persistence.*;
 
@@ -27,6 +28,8 @@ public class Order {
 
     @Embedded
     private ShippingInfo shippingInfo;  // 배송지 정보
+
+    @Convert(converter = MoneyConverter.class)
     private Money totalAmounts;   // 총 주문 금액
 
     protected Order() {
