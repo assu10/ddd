@@ -17,6 +17,7 @@ public class MemberData {
 
     private String name;
 
+    @Column(name = "blocked")
     private boolean blocked;
 
     protected MemberData() {
