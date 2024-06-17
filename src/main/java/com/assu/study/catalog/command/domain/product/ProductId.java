@@ -21,7 +21,7 @@ public class ProductId implements Serializable {
     protected ProductId() {
     }
 
-    private ProductId(String id) {
+    public ProductId(String id) {
         this.id = id;
     }
 

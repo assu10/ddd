@@ -4,7 +4,9 @@ import com.assu.study.member.command.domain.MemberId;
 import com.assu.study.order.command.domain.OrderNo;
 import com.assu.study.order.command.domain.OrderState;
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 @Getter
 public class OrderView {
     private final String number;

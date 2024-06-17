@@ -4,6 +4,7 @@ import com.assu.study.common.jpa.MoneyConverter;
 import com.assu.study.common.model.Money;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 // 주문 (애그리거트 루트)
@@ -18,29 +19,45 @@ public class Order {
     @Embedded
     private Orderer orderer;    // 주문자
 
-    private OrderState state;   // 주문 상태
-
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "order_line",
             joinColumns = @JoinColumn(name = "order_number"))
     @OrderColumn(name = "line_idx")
     private List<OrderLine> orderLines; // 주문 항목
 
+    @Convert(converter = MoneyConverter.class)
+    @Column(name = "total_amounts")
+    private Money totalAmounts;   // 총 주문 금액
+
     @Embedded
     private ShippingInfo shippingInfo;  // 배송지 정보
 
-    @Convert(converter = MoneyConverter.class)
-    private Money totalAmounts;   // 총 주문 금액
+
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    private OrderState state;   // 주문 상태
+
+    @Column(name = "order_date")
+    private LocalDateTime orderDate;
 
     protected Order() {
     }
 
     // 생성자 호출 시점에 필요한 데이터에 대한 검증 확인 가능
-    public Order(Orderer orderer, List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState state) {
+    public Order(OrderNo number, Orderer orderer, List<OrderLine> orderLines,
+                 ShippingInfo shippingInfo, OrderState state) {
+        setNumber(number);
         setOrderer(orderer);
         setOrderLines(orderLines);
         setShippingInfo(shippingInfo);
         this.state = state;
+        this.orderDate = LocalDateTime.now();
+        //Events.raise(new OrderPlacedEvent(number.getNumber(), orderer, orderLines, orderDate));
+    }
+
+    private void setNumber(OrderNo number) {
+        if (number == null) throw new IllegalArgumentException("no number");
+        this.number = number;
     }
 
     // 생성자에서 호출되는 함수

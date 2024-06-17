@@ -18,9 +18,8 @@ public class Orderer {
     @AttributeOverrides(
             @AttributeOverride(name = "id", column = @Column(name = "orderer_id"))
     )
-
-
     private MemberId memberId;
+
     @Column(name = "orderer_name")
     private String name;
 

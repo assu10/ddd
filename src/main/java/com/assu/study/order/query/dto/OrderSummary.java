@@ -4,12 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.ToString;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
 import org.hibernate.annotations.Synchronize;
 
 import java.time.LocalDateTime;
 
+@ToString
 @Entity
 @Immutable  // 실수로 매핑 필드/프로퍼티가 수정되어도 DB 에 반영하지 않음
 @Subselect(
