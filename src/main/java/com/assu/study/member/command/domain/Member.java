@@ -33,6 +33,7 @@ public class Member {
     }
 
     public void changePassword(String currentPassword, String newPassword) {
+        // 현재 암호와 일치하는지 검사
         if (!password.match(currentPassword)) {
             throw new PasswordNotMatchingException();
         }
