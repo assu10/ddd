@@ -41,4 +41,9 @@ public class Member {
         // 밸류 타입의 데이터를 변경할 때는 새로운 객체로 교체함
         this.password = new Password(newPassword);
     }
+
+    public void block() {
+        this.blocked = false;
+        // TODO: Event..
+    }
 }
