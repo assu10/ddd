@@ -16,6 +16,10 @@ public class Order {
     @EmbeddedId
     private OrderNo number; // OrderNo 가 식별자 타입
 
+    // 비선점 잠금 방식을 이용하기 위한 필드
+    @Version
+    private long version;
+
     @Embedded
     private Orderer orderer;    // 주문자
 
@@ -121,10 +125,14 @@ public class Order {
 
     // 출고 전 상태인지 검사
     private void verifyNotYetShipped() {
-        // 결제 전 이 아니고, 상품 준비중이 아니면 이미 출고된 상태임
-        if (state != OrderState.PAYMENT_WAITING && state != OrderState.PREPARING) {
-            throw new IllegalArgumentException("already shipped");
+        if (!isNotYetShipped()) {
+            throw new AlreadyShippedException();
         }
+    }
+
+    // 아직 결제 전이거나 상품 준비중이면 아직 출고되지 않은 상태임
+    public boolean isNotYetShipped() {
+        return state == OrderState.PAYMENT_WAITING || state == OrderState.PREPARING;
     }
 
     public void changeShipped() {
@@ -134,5 +142,26 @@ public class Order {
     // 결제 완료 확인
     public void completePayment() {
         // TODO
+    }
+
+    // 비선점 잠금 방식으로 정보 수정 시 애그리거트 버전 정보가 일치하는지 확인
+    public boolean matchVersion(long version) {
+        return this.version == version;
+    }
+
+    // 배송 출발로 상태 변경
+    public void startShipping() {
+        verifyNotYetShipped();
+        verifyNotCanceled();
+    }
+
+    private void verifyNotCanceled() {
+        if (state == OrderState.CANCELED) {
+            throw new OrderAlreadyCanceledException();
+        }
+    }
+
+    public void verifyShippableState() {
+
     }
 }
