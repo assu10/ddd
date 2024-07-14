@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class BlockMemberService {
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional

@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class StartShippingService {
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional

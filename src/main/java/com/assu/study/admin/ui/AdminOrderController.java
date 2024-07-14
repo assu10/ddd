@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 @Controller
 public class AdminOrderController {
-    private StartShippingService startShippingService;
+    private final StartShippingService startShippingService;
 
     // 배송 시작으로 상태 변경 시
     @PostMapping("/admin/orders/{orderNo}/shipping")
