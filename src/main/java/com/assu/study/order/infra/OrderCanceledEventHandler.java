@@ -4,6 +4,7 @@ import com.assu.study.order.command.application.RefundService;
 import com.assu.study.order.command.domain.OrderCanceledEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 // OrderCanceledEvent 처리하는 핸들러
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class OrderCanceledEventHandler {
     private final RefundService refundService;
 
+    @Async
     @EventListener(OrderCanceledEvent.class)
     public void handle(OrderCanceledEvent event) {
         refundService.refund(event.getOrderNumber());
