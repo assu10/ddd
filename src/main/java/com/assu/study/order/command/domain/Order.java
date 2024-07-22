@@ -1,5 +1,6 @@
 package com.assu.study.order.command.domain;
 
+import com.assu.study.common.event.Events;
 import com.assu.study.common.jpa.MoneyConverter;
 import com.assu.study.common.model.Money;
 import jakarta.persistence.*;
@@ -111,16 +112,19 @@ public class Order {
     // 애그리거트 루트는 도메인 규칙을 구현한 기능을 제공함
     // 도메인 모델의 엔티티는 도메인 기능도 함께 제공
     // 배송지 변경
-    public void changeShippingInfo(ShippingInfo newShipping) {
+    public void changeShippingInfo(ShippingInfo newShippingInfo) {
         // 배송지 변경 가능 여부 확인
         verifyNotYetShipped();
-        setShippingInfo(newShipping);
+        setShippingInfo(newShippingInfo);
+        Events.raise(new ShippingInfoChangedEvent(number, newShippingInfo));
     }
 
     // 주문 취소
     public void cancel() {
         verifyNotYetShipped();
         this.state = OrderState.CANCELED;
+
+        Events.raise(new OrderCanceledEvent(number.getNumber()));
     }
 
     // 출고 전 상태인지 검사
